@@ -93,7 +93,7 @@ int main(){
 		for(int j=0;j<cot;j++){
 			a[i][j]=rand()%100;
 			fprintf(f,"%6d",a[i][j]);
-		}
+		}git 
 		fprintf(f,"\n");
 	}
 	fclose(f);
