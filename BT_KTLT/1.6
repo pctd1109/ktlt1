@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+long long f[100];
+long long tinhxn(int n){
+	long long s=0;
+	if(!f[n]){
+		for(int i=0;i<n;i++)
+			s=s+tinhxn(i)*(n-i);
+		f[n]=s;
+	}
+	return f[n];
+}
+int main(){
+	int n;
+	cout <<"Nhap n: "; cin>>n;
+	f[0]=1;	f[1]=1;
+	cout <<"\nSum= "<<tinhxn(n);
+	return 0;
+}

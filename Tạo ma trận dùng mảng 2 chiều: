@@ -1,0 +1,29 @@
+#include<iostream>
+#include<cstdlib>
+#include<ctime>
+#define maxdong 100
+#define maxcot 100
+using namespace std;
+void nhap(int a[maxdong][maxcot],int &dong,int &cot){
+	cout <<"Nhap so dong: ";cin>>dong;
+	cout <<"Nhap so cot: ";cin>>cot;
+	for(int i=0;i<dong;i++)
+		for(int j=0;j<cot;j++){
+			a[i][j]=rand()%100;
+		}
+}
+void xuat(int a[maxdong][maxcot],int dong,int cot){
+	for(int i=0;i<dong;i++){
+		for(int j=0;j<cot;j++)
+			cout <<a[i][j]<<" ";
+		cout << endl;
+	}
+}
+int main(){
+	int dong,cot;
+	srand(time(NULL));
+	int a[maxdong][maxcot];
+	nhap(a,dong,cot);
+	xuat(a,dong,cot);
+	return 0;
+}

@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+double xn(int n);
+double yn(int n);
+int main(){
+	int n;
+	cout <<"Nhap n: "; cin>>n;
+	cout <<"Xn = "<<xn(n);
+	cout <<"\nYn = "<<yn(n);
+	return 0;
+}
+double xn(int n){
+	if(n==0)	return 1;
+	return 1.0*xn(n-1)/3+yn(n-1)/2+27;
+}
+double yn(int n){
+	if(n==0)	return 2;
+	return 1.0*xn(n-1)/5+yn(n-1)/7+11;
+}

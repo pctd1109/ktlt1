@@ -1,0 +1,10 @@
+{
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "selection sort": "cpp",
+        "nhập&xuất chuỗi kí tự": "cpp",
+        "quick sort": "cpp",
+        "linearsearch": "cpp",
+        "binarysearch": "cpp"
+    }
+}

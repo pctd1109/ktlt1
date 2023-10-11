@@ -1,0 +1,64 @@
+#include<iostream>
+#include<cstdlib>
+using namespace std;
+struct	node{
+	int info;
+	node *left, *right;
+};
+typedef node *tree;
+int insert_BST(tree& root, int k) {
+	if (root != NULL) {
+		if (root->info == k)	return 0; // Giá trị k đã tồn tại trong cây
+		if (root->info > k)	return insert_BST(root->left, k); // Node hiện tại có value lớn hơn k -> chèn k vào cây con trái
+		else return	insert_BST(root->right, k); // Node hiện tại có value bé hơn k -> chèn k vào cây con phải
+	}
+	else {
+		root = new node; // Tạo một node mới
+		if (root == NULL)	return -1; // Không đủ bộ nhớ để tạo node mới
+		root->info = k; // Gán giá trị k cho node mới
+		root->left = root->right = NULL; // Khởi tạo con trái và con phải của node mới là NULL
+		return 1; // Thêm giá trị thành công
+	}
+}
+void tao_BST(tree &root){
+	int k,n;
+	cout <<"Nhap so luong phan tu: "; cin>>n;
+	root=NULL;
+	for(int i=1;i<=n;i++){
+		cin>>k;
+		insert_BST(root,k);
+	}
+}
+void LNR(tree root){
+	if(root!=NULL){
+		LNR(root->left);
+		cout <<root->info<<" ";
+		LNR(root->right);
+	}
+}
+void NLR(tree root){
+	if(root!=NULL){
+		cout <<root->info<<" ";
+		NLR(root->left);
+		NLR(root->right);
+	}
+}
+void LRN(tree root){
+	if(root!=NULL){
+		LRN(root->left);
+		LRN(root->right);
+		cout <<root->info<<" ";
+	}
+}
+int main(){
+	tree root;
+	tao_BST(root);
+	LNR(root);
+	return 0;
+}
+/*
+Cấu trúc dữ liệu Binary Search Tree (BST) đã định nghĩa một quy tắc cụ thể về cách các giá trị được sắp xếp trong cây. 
+Các giá trị được chèn vào BST sẽ được tổ chức theo thứ tự để duy trì tính chất của BST.
+Do đó, khi sử dụng cây BST, dãy số output sẽ luôn được xuất ra theo thứ tự tăng dần do tính chất của cây BST. 
+Không có cách tự động thay đổi thứ tự output theo thứ tự đã nhập khi sử dụng cây BST mà không làm thay đổi cấu trúc của cây.
+*/

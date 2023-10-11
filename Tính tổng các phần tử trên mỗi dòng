@@ -1,0 +1,10 @@
+void tongdong(int a[maxdong][maxcot],int dong, int cot){
+	for(int i=0;i<dong;i++){
+		int sumrow=0;
+		for(int j=0;j<cot;j++){
+			sumrow=sumrow+a[i][j];
+		}
+		cout << "Tong moi dong: "<<sumrow;
+		cout << endl;
+	}
+}

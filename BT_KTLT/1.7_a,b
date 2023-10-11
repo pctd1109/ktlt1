@@ -1,0 +1,33 @@
+#include<iostream>
+#define maxn 1000
+using namespace std;
+void nhap(int a[], int &n){
+	cout <<"Nhap soluong phan tu: "; cin>>n;
+	for(int i=0;i<n;i++)
+		cin>>a[i];
+}
+void xuat(int a[], int n){
+	for(int i=0;i<n;i++)
+		cout <<a[i]<<" ";
+}
+int tinhtong(int a[], int n){
+	if(n==1)	return a[0];
+	return tinhtong(a,n-1)+a[n-1];
+}
+int GTLN(int a[], int n){
+	if(n==0)	return 0;
+	if(n==1)	return a[0];
+	else{
+		int x=GTLN(a,n-1);
+		if(a[n-1 ]>x)	return a[n-1];
+		return x;
+	}
+}
+int main(){
+	int a[maxn], n;
+	nhap(a,n);
+	xuat(a,n);
+	cout <<"\nTong cac phan tu: "<<tinhtong(a,n);
+	cout <<"\nGTLN: "<<GTLN(a,n);
+	return 0;
+}

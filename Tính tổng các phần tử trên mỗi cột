@@ -1,0 +1,9 @@
+void tongcot(int a[maxdong][maxcot], int dong, int cot){
+	for(int j=0;j<cot;j++){
+		int sumcol=0;
+		for(int i=0;i<dong;i++)
+			sumcol=sumcol+a[i][j];
+		cout <<"Tong moi cot: "<<sumcol;
+		cout << endl;
+	}
+}

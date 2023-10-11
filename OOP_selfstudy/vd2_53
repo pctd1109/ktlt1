@@ -1,0 +1,76 @@
+#include<iostream>
+#include<cstdlib>
+#include<conio.h>
+using namespace std;
+typedef int MT[20][20];
+
+void nhapmt(MT a, char *ten, int m, int n){
+	for(int i=0;i<m;i++)
+		for(int j=0;j<n;j++){
+			cout <<"\n"<<ten<<"["<<i<<","<<j<<"] = ";
+			cin>>a[i][j];
+		}
+}
+
+void nhapmt(MT a, char *ten, int n){
+	nhapmt(a,ten,n,n);
+}
+
+void inmt(MT a, char *ten, int m, int n){
+	cout <<"\nMa tran: "<<ten;
+	for(int i=0;i<m;i++){
+		cout <<endl;
+		for(int j=0;j<n;j++)
+			cout<< a[i][j]<<" ";
+	}
+}
+
+void inmt(MT a, char *ten, int n){
+	inmt(a,ten,n,n);
+}
+
+void nhanmt(MT a, MT b, MT c, int m, int n, int p){
+	for(int i=0;i<m;i++)
+		for(int j=0;j<p;j++){
+			c[i][j]=0;
+			for(int k=0;k<n;k++)
+				c[i][j] += a[i][k] * b[k][j]; // S?a d?u '+' thành '*'
+		}	
+}
+
+void nhanmt(MT a, MT b, MT c, int n){
+	nhanmt(a,b,c,n,n,n);
+}
+
+int main(){
+	MT a,b,c,d;	//d=abc
+	MT u;
+	nhapmt(a,"A",2);
+	nhapmt(b,"B",2);
+	nhapmt(c,"C",2,3);
+	nhanmt(a,b,u,2);
+	nhanmt(u,c,d,2,2,3);
+	inmt(a,"A",2);
+	inmt(b,"B",2);
+	inmt(u,"U = A * B",2);
+	inmt(c,"C",2,3);
+	inmt(d,"D = U * C",2,3);
+	return 0;
+}
+/*
+Dưới đây là giải thích về từng hàm trong code:
+
+1. `void nhapmt(MT a, char *ten, int m, int n)`: Hàm này được sử dụng để nhập ma trận `a` có kích thước `m x n`. Tham số `ten` là tên của ma trận và được sử dụng để hiển thị thông báo cho người dùng nhập giá trị của từng phần tử.
+
+2. `void nhapmt(MT a, char *ten, int n)`: Hàm này là phiên bản tái sử dụng của hàm `nhapmt` trên, nó cho phép nhập ma trận `a` có kích thước `n x n` khi chỉ cung cấp một tham số kích thước.
+
+3. `void inmt(MT a, char *ten, int m, int n)`: Hàm này được sử dụng để in ra ma trận `a` có kích thước `m x n`. Tham số `ten` là tên của ma trận và được sử dụng để hiển thị tên ma trận trong kết quả.
+
+4. `void inmt(MT a, char *ten, int n)`: Hàm này là phiên bản tái sử dụng của hàm `inmt` trên, nó cho phép in ra ma trận `a` có kích thước `n x n` khi chỉ cung cấp một tham số kích thước.
+
+5. `void nhanmt(MT a, MT b, MT c, int m, int n, int p)`: Hàm này được sử dụng để nhân hai ma trận `a` và `b` kích thước `m x n` và `n x p` tương ứng, và lưu kết quả vào ma trận `c` có kích thước `m x p`.
+
+6. `void nhanmt(MT a, MT b, MT c, int n)`: Hàm này là phiên bản tái sử dụng của hàm `nhanmt` trên, nó cho phép nhân hai ma trận `a` và `b` có kích thước `n x n` khi chỉ cung cấp một tham số kích thước.
+
+Hàm `main` trong chương trình chính thực hiện nhập các ma trận A, B, C, thực hiện các phép nhân ma trận và in kết quả.
+*/

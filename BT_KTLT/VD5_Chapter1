@@ -1,0 +1,41 @@
+#include<iostream>
+using namespace std;
+int tong_chu_so(int n) {
+	if (n < 10)	return n;
+	return n % 10 + tong_chu_so(n / 10);
+}
+int sumn(int n) {
+	if (n == 0)	return 0;
+	if (n == 1) return 1;
+	return sumn(n - 1) + n;
+}
+int UCLN(int a, int b) {
+	if (b == 0)	return a;
+	return UCLN(b, a % b);
+}
+long convert(int n, int c) {
+	if (n < c)	return n;
+	return n % c + 10 * convert(n / c, c);
+}
+double tinhxn(int x, int mu) {
+	if (mu == 0)	return 1;
+	return x * tinhxn(x, mu-1);
+}
+int main() {
+	int n;
+	cout << "Nhap n: "; cin >> n;
+	cout << "Tong cac chu so cua n: " << tong_chu_so(n);
+	cout << "\nTong day 1 + 2 + ...: " << sumn(n);
+	int a, b;
+	cout << "\nNhap a: "; cin >> b;
+	cout << "Nhap b: "; cin >> a;
+	cout << "UCLN cua " << a << " va " << b << ": " << UCLN(a, b);
+	int c;
+	cout << "\nNhap he co so muon chuyen doi: "; cin >> c;
+	cout << "Gia tri cua " << n << " khi chuyen sang he co so " << c << ": " << convert(n, c);	
+	int x,mu;
+	cout << "\nNhap x: "; cin >> x;
+	cout << "Nhap so mu: "; cin >> mu;
+	cout << x<<"^"<<mu<<" = "<<tinhxn(x, mu);
+	return 0;
+}

@@ -1,0 +1,32 @@
+#include<iostream>
+#define maxn 1000
+using namespace std;
+void nhap(int a[], int &n){
+	cout <<"Nhap so luong phan tu: ";	cin>>n;
+	for(int i=0;i<n;i++)
+		cin>>a[i];
+}
+void xuat(int a[], int n){
+	for(int i=0;i<n;i++)
+		cout <<a[i]<<" ";
+}
+void exch(int &a, int &b){
+	int temp=a;
+	a=b;
+	b=temp;
+}
+void BubbleSort(int a[], int n){
+	int i,j;
+	for(int i=0;i<n-1;i++)
+		for(int j=n-1;j>i;j--)
+			if(a[j]<a[j-1])	exch(a[j],a[j-1]);
+}
+int main(){
+	int a[maxn], n;
+	nhap(a,n);
+	xuat(a,n);
+	BubbleSort(a,n);
+	cout <<"\nMang sau khi sap xep theo thu tu tang dan: ";
+	xuat(a,n);
+	return 0;
+}

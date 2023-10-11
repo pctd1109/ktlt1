@@ -1,0 +1,29 @@
+#include<iostream>
+using namespace std;
+void nhap(char *s){
+	puts("Nhap chuoi: ");
+	fflush(stdin);
+	fgets(s,512,stdin);
+}
+int main(){
+	char *s=new char[512];
+	nhap(s);
+	puts(s);
+	return 0;
+}
+//Cach nhap 2
+char* nhap()
+{
+    char* s= new char[100];
+    puts ("Moi ban nhap");
+    fflush(stdin);
+    gets(s);
+    return s;
+}
+//Cach nhap 3
+void nhap3 (char* &s)
+{
+    s=new char[100];
+    puts ("Moi ban nhap");
+    gets(s);
+}

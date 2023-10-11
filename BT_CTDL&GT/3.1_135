@@ -1,0 +1,112 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+struct	node{
+	int info;
+	node *next;
+};
+struct	list{
+	node *head, *tail;
+};
+list l;
+node *getnode(int x){
+	node *p=new node;
+	if(p==NULL)	exit(1);
+	p->info=x;
+	p->next=NULL;
+	return p;
+}
+void insert_tail(list &l, node *p){
+	if(l.head==NULL){
+		l.head=p;
+		l.tail=p;
+	}
+	else{
+		l.tail->next=p;
+		l.tail=p;
+	}
+}
+void list_insert_tail(list &l){
+	int x,n;
+	cout <<"Nhap so luong phan tu: ";cin>>n;
+	for(int i=1;i<=n;i++){
+		cin>>x;
+		insert_tail(l,getnode(x));
+	}
+}
+void list_process(list l){
+	node *p=l.head;
+	while(p!=NULL){
+		cout <<p->info<<" ";
+		p=p->next;
+	}
+}
+void find_max(list l){
+	int max=INT_MIN;
+	for(node*p=l.head;p!=NULL;p=p->next)
+		if(p->info>max)	max=p->info;
+	cout <<"\nGia tri lon nhat: "<<max;
+}
+void sum(list l){
+	int s=0;
+	for(node *p=l.head;p!=NULL;p=p->next)
+		s=s+p->info;
+	cout <<"\nTong cac phan tu: "<<s;
+}
+int prime(int n){
+	if(n<2)	return 0;
+	for(int i=2;i<=sqrt(n);i++)
+		if(n%i==0)	return 0;
+	return 1;	
+}
+void dem_snt(list l){
+	int dem=0;
+	for(node*p=l.head;p!=NULL;p=p->next)
+		if(prime(p->info))	dem++;
+	cout <<"\nSo luong SNT: "<<dem;
+}
+void dem_so_am(list l){
+	int dem2=0;
+	for(node*p=l.head;p!=NULL;p=p->next)
+		if(p->info<0)	dem2++;
+	cout <<"\nSo luong so am: "<<dem2;
+}
+void dem_so_0(list l){
+	int dem3=0;
+	for(node *p=l.head;p!=NULL;p=p->next)
+		if(p==0)	dem3++;
+	cout <<"\nSo luong so bang 0: "<<dem3;
+}
+void dem_so_duong(list l){
+	int dem4=0;
+	for(node *p=l.head;p!=NULL;p=p->next)
+		if(p->info>0)	dem4++;
+	cout <<"\nSo luong so duong: "<<dem4;
+}
+void dem_so_k(list l, int k){
+	int dem5=0;
+	for(node *p=l.head;p!=NULL;p=p->next)
+		if(p->info==k)	dem5++;
+	cout <<"\nSo luong so k: "<<dem5;
+}
+void tim_min_duong(list l){
+	int min=INT_MAX;
+	for(node *p=l.head;p!=NULL;p=p->next)
+		if(p->info>0&&p->info<min)	min=p->info;
+	cout <<"\nSo duong nho nhat: "<<min;
+}
+int main(){
+	list_insert_tail(l);
+	list_process(l);
+	find_max(l);
+	sum(l);
+	dem_snt(l);
+	dem_so_am(l);
+	dem_so_0(l);
+	dem_so_duong(l);
+	int k;
+	cout <<"\nNhap so k can dem: ";	cin>>k;
+	dem_so_k(l,k);
+	tim_min_duong(l);
+	return 0;
+}

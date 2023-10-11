@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+int caua(int n){
+	if(n==1)	return n;
+	if(n==0)	return n;
+	return caua(n-1)+n;
+}
+int caub(int n){
+	if(n==1)	return n;
+	if(n==0)	return n;
+	return n*n+caub(n-1);
+}
+int cauc(int n){
+	if(n==1)	return 1;
+	int phantucuoi=1;
+	for(int i=1;i<=n;i++)
+		phantucuoi=phantucuoi*i;
+	return phantucuoi+cauc(n-1);
+}
+int caud(int n){
+    if (n == 0)	return 0;
+    int factorial = 1;
+    for (int i = n; i <= 2 * n; i++)
+        factorial *= i;
+    return factorial + caud(n - 1);
+}
+int  main(){
+	int n;
+	cout <<"Nhap n: "; cin>>n;
+	cout <<"Cau a: "<<caua(n);
+	cout <<"\nCau b: "<<caub(n);
+	cout <<"\nCau c: "<<cauc(n);
+	cout <<"\nCau d: "<<caud(n);
+	return 0;
+}	
