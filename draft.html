@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FREE SITE</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .left-side, .right-side, .center {
+            height: 100vh;
+        }
+
+        .left-side {
+            flex: 0.25;
+            background-color: #0074E4; /* Màu xanh dương */
+        }
+
+        .center {
+            flex: 1;
+            background: white; /* Nền trong suốt */
+            display: flex;
+            justify-content: center;
+            align-self: center;
+        }
+        .center img{
+            align-self:inherit;
+            width: 500;
+            height: 100;
+        }
+        .center img.new-image{
+            width:900px;
+            height:90px;
+        }
+        .right-side {
+            flex: 0.25;
+            background-color: #0074E4; /* Màu xanh dương */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-side"></div>
+        <div class="center">
+            <h1>
+                <img src="logo.gif" alt="This is the logo" align="center">
+            </h1>
+            <img src="free.gif" alt="This is free.gif" class="new-image">
+        </div>
+        <div class="right-side"></div>
+    </div>
+    <pre>
+        
+    </pre>
+</body>
+</html>
