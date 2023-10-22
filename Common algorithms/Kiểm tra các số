@@ -1,0 +1,84 @@
+#include<iostream>
+#include<cmath>
+#define maxn 1000
+using namespace std;
+void nhap(int a[], int &n){
+	cout <<"Nhap so luong phan tu: "; cin>>n;
+	for(int i=0;i<n;i++)
+		cin>>a[i];
+}
+/*void nhap_v2(int *&a, int &n){
+	cout <<"Nhap so luong phan tu: "; cin>>n;
+	a = new int[n];
+	for(int i=0;i<n;i++)
+		cin>>a[i];
+}*/
+void xuat(int a[], int n){
+	for(int i=0;i<n;i++)
+		cout <<a[i]<<" ";
+}
+int prime(int n){
+	if(n<2)	return 0;
+	for(int i=2;i<=sqrt(n);i++)
+		if(n%i==0)	return 0;
+	return 1;
+}
+int sntdx(int n){
+	if(!prime(n))	return 0;
+	int u=n+1;
+	while(!prime(u))	u++;
+	int v=n-1;
+	while(!prime(v))	v--;
+	return u+v == 2*n;
+}
+int sdx(int n){
+	int s=0, temp=n;
+	while(temp>0){
+		s = s*10 + temp%10;
+		temp = temp/10;
+	}
+	if(s==n)	return 1;
+	return 0;
+}
+int shc(int n){
+	int s=0;
+	for(int i=1;i<=n/2;i++)
+		if(n%i==0)	s=s+i;
+	if(s==n)	return 1;
+	return 0;
+}
+int UCLN(int a, int b){
+	int r=a%b;
+	while(r!=0){
+		a=b;
+		b=r;
+		r=a%b;
+	}
+	return b;
+}
+/*De quy
+int UCLN(int a,int b){
+	if(b==0)	return a;
+	return UCLN(b, a%b);
+}
+*/
+int BCNN(int a, int b){
+	return a*b/UCLN(a,b);
+}
+int scp(int n){
+	int sqr=sqrt(n);
+	return sqr*sqr==n;
+}
+void check(int a[], int n){
+	cout <<"So chinh phuong la: ";
+	for(int i=0;i<n;i++)
+		if(scp(a[i]))	cout<<a[i] << " ";
+}
+int main(){
+	int a[maxn], n;
+	//int *a, n;	Danh cho cap phat dong
+	nhap(a,n);
+	xuat(a,n);
+	check(a,n);	
+	return 0;
+}

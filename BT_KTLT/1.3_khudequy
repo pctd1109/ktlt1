@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+double xn(int n);
+double yn(int n);
+int main(){
+	int n;
+	cout <<"Nhap n: "; cin>>n;
+	cout <<"Xn = "<<xn(n);
+	cout <<"\nYn = "<<yn(n);
+	return 0;
+}
+double xn(int n) {
+    double xn = 1.0, yn = 2.0;
+
+    for (int i = 1; i <= n; i++) {
+        double xn_new = (xn / 3.0) + (yn / 2.0) + 27.0;
+        double yn_new = (xn / 5.0) + (yn / 7.0) + 11.0;
+        xn = xn_new;
+        yn = yn_new;
+    }
+
+    return xn;
+}
+double yn(int n) {
+    double xn = 1.0, yn = 2.0;
+
+    for (int i = 1; i <= n; i++) {
+        double xn_new = (xn / 3.0) + (yn / 2.0) + 27.0;
+        double yn_new = (xn / 5.0) + (yn / 7.0) + 11.0;
+        xn = xn_new;
+        yn = yn_new;
+    }
+
+    return yn;
+}

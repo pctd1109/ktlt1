@@ -1,0 +1,19 @@
+int main(){
+	FILE*f;
+	f=fopen("table.inp","wt");
+	int dong,cot;
+	int a[maxn][maxn];
+	srand(time(NULL));
+	cout <<"Nhap so dong: ";cin>>dong;
+	cout <<"Nhap so cot: ";cin>>cot;
+	fprintf(f,"%d %d\n",dong,cot);
+	for(int i=0;i<dong;i++){
+		for(int j=0;j<cot;j++){
+			a[i][j]=rand()%100;
+			fprintf(f,"%6d",a[i][j]);
+		}
+		fprintf(f,"\n");
+	}
+	fclose(f);
+	return 0;
+}

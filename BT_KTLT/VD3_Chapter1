@@ -1,0 +1,20 @@
+//Đệ quy hỗ tương
+#include<iostream>
+using namespace std;
+int xn(int n);  //Phai khai báo nguyên mẫu 2 hàm xn, yn để nếu không sẽ bị lỗi
+int yn(int n);
+int xn(int n) {
+	if (n == 0)	return 1;
+	return xn(n - 1) + yn(n - 1);   
+}
+int yn(int n) {
+	if (n == 0)	return 0;
+	return 3*xn(n - 1) + 2*yn(n - 1);
+}
+int main() {
+	int n;
+	cout << "Nhap n: "; cin >> n;
+	cout << "Xn: " << xn(n);
+	cout << "\nYn: " << yn(n);
+	return 0;
+}

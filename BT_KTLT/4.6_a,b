@@ -1,0 +1,109 @@
+#include<iostream>
+#include<cstdlib>
+#include<time.h>
+#include<cmath>
+#define maxdong 100
+#define maxcot 100
+using namespace std;
+void docfile(int a[maxdong][maxcot],int dong,int cot){
+	FILE*f;
+	f=fopen("matrix.inp","rt");
+	fscanf(f,"%d %d",&dong,&cot);
+	for(int i=0;i<dong;i++)
+		for(int j=0;j<cot;j++){
+			fscanf(f,"%d",&a[i][j]);
+		}
+	fclose(f);
+}
+//Ham tim gtnn tren dong i
+int timki(int a[maxdong][maxcot],int i,int cot){
+	int min=INT_MAX;
+	for(int j=0;j<cot;j++)	//vi tren 1 dong thi gia tri chay la cac phan tu tren cac cot
+		if(a[i][j]<min)	min=a[i][j];
+	return min;
+}
+//Ham gan gia tri cho mang b va tinh tong cac phan tu cua mang do
+int caua(int a[maxdong][maxcot],int dong,int cot,int b[maxdong][maxcot]){
+	int s=0;
+	for(int i=0;i<dong;i++){
+		int ki=timki(a,i,cot);
+		for(int j=0;j<cot;j++){
+			b[i][j]=a[i][j]*ki;
+			s=s+b[i][j];
+		}
+	}
+	return s;
+}
+int prime(int n){
+	if(n<2)	return 0;
+	for(int i=2;i<=sqrt(n);i++)
+		if(n%i==0)	return 0;
+	return 1;
+}
+int timsntgannhat(int n){
+	int u=n-1;
+	int v=n+1;
+	while(!prime(u)&&!prime(v)){
+		u--;
+		v++;
+	}
+	if(prime(u))	return u;
+	return v;
+}
+//TH1: de dang noi mang a[][]
+int caub_1(int a[maxdong][maxcot],int dong,int cot,int b[maxdong][maxcot]){
+	int sum=0;
+	for(int i=0;i<dong;i++)
+		for(int j=0;j<cot;j++){
+			b[i][j]=timsntgannhat(a[i][j]);
+			sum=sum+b[i][j];
+		}
+	return sum;
+}
+//TH2: de dang noi mang b
+int caub_2(int b[maxdong][maxcot],int dong,int cot,int c[maxdong][maxcot]){
+	int sum=0;
+	for(int i=0;i<dong;i++)
+		for(int j=0;j<cot;j++){
+			c[i][j]=timsntgannhat(b[i][j]);
+			sum=sum+c[i][j];
+		}
+	return sum;
+}
+void ghifile(int a[maxdong][maxcot],int dong,int cot,int b[maxdong][maxcot]){
+	FILE*f;
+	f=fopen("matrix.out","wt");
+	fprintf(f,"Cau a: %d\n",caua(a,dong,cot,b));
+	fprintf(f,"Cau b: %d\n",caub_1(a,dong,cot,b));	//caub(b,dong,cot,c)
+	fclose(f);
+}
+int main(){
+	FILE*f;
+	f=fopen("matrix.inp","wt");
+	
+	int a[maxdong][maxcot];
+	int b[maxdong][maxcot];
+	int c[maxdong][maxcot];
+	int dong,cot;
+	srand(time(NULL));
+	cout <<"Nhap so dong: ";cin>>dong;
+	cout <<"Nhap so cot: ";cin>>cot;
+	fprintf(f,"%d %d\n",dong,cot);
+	for(int i=0;i<dong;i++){
+		for(int j=0;j<cot;j++){
+			a[i][j]=rand()%100;
+			fprintf(f,"%6d",a[i][j]);
+		}git 
+		fprintf(f,"\n");
+	}
+	fclose(f);
+	docfile(a,dong,cot);
+	caua(a,dong,cot,b);
+	for(int i=0;i<dong;i++){
+		for(int j=0;j<cot;j++)
+			cout << a[i][j]<<" ";
+		cout << endl;
+	}
+	ghifile(a,dong,cot,b);
+	return 0;
+}

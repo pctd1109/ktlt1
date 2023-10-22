@@ -1,0 +1,87 @@
+#include<iostream>
+#include<cstdlib>
+#include<ctime>
+#include<cmath>
+#define maxdong 100
+#define maxcot 100
+using namespace std;
+FILE*f;
+void docfile(int a[maxdong][maxcot], int dong, int cot){
+	FILE*f;
+	f=fopen("table2.inp","rt");
+	fscanf(f,"%d %d", &dong, &cot);
+	for(int i=0;i<dong;i++)
+		for(int j=0;j<cot;j++)
+			fscanf(f,"%d",&a[i][j]);
+	fclose(f);
+}
+void find_count_max(int a[maxdong][maxcot], int dong, int cot){
+	int max=INT_MIN;
+	for(int i=0;i<dong;i++)
+		for(int j=0;j<cot;j++)
+			if(a[i][j]>max)	max=a[i][j];
+	//cout << "GTLN cua mang: "<<max;
+	int dem=0;
+	for(int i=0;i<dong;i++)
+		for(int j=0;j<cot;j++)	
+			if(a[i][j]==max)	dem++;
+	fprintf(f,"\nCau a: %3d %3d",max,dem);
+}
+void sum_col(int a[maxdong][maxcot], int dong, int cot){
+	fprintf(f,"\nCau b: ");
+	for(int j=0;j<cot;j++){
+		int sumcol=0;
+		for(int i=0;i<dong;i++)
+			sumcol=sumcol+a[i][j];
+		fprintf(f,"%6d",sumcol);
+	}
+}
+int prime(int n){
+	if(n<2)	return 0;
+	for(int i=2;i<=sqrt(n);i++)
+		if(n%i==0)	return 0;
+	return 1;
+}
+void prime_square(int a[maxdong][maxcot],int dong, int cot){
+	fprintf(f,"\nCau c: ");
+	int max=INT_MIN;
+	for(int i=0;i<dong;i++){
+		int s=0;
+		for(int j=0;j<cot;j++){
+			if(prime(a[i][j])&&prime(a[i][j+1])&&prime(a[i+1][j])&&prime(a[i+1][j+1]))
+				s=s+a[i][j]+a[i+1][j]+a[i][j+1]+a[i+1][j+1];
+		}
+		if(s>max)	max=s;
+	}
+	fprintf(f,"%6d",max);
+}
+void ghifile(int a[maxdong][maxcot], int dong, int cot){
+	f=fopen("table2.out","wt");
+	find_count_max(a,dong,cot);
+	sum_col(a,dong,cot);
+	prime_square(a,dong,cot);
+	fclose(f);
+}
+int main(){
+	FILE*f;
+	f=fopen("table2.inp","wt");
+	int dong, cot;
+	srand(time(NULL));
+	int a[maxdong][maxcot];
+	cout <<"Nhap so dong: ";cin>>dong;
+	cout <<"Nhap so cot: ";cin>>cot;
+	fprintf(f,"%d %d\n",dong,cot);
+	for(int i=0;i<dong;i++){
+		for(int j=0;j<cot;j++){
+			a[i][j]=rand()%100;
+			fprintf(f,"%6d",a[i][j]);
+		}
+		fprintf(f,"\n");
+	}
+	fclose(f);
+	docfile(a,dong,cot);
+	//cout <<"\nSo luong so co gia tri bang GTLN: "<<find_count_max(a,dong,cot)<<endl;	//caua
+	//sum_col(a,dong,cot);	//caub
+	ghifile(a,dong,cot);
+	return 0;
+}

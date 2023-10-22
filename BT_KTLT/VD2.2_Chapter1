@@ -1,0 +1,18 @@
+//Đệ quy có nhớ
+#include<iostream>
+using namespace std;
+long long f[100];
+long long fib(int n) {
+	if (!f[n])
+		f[n] = fib(n - 1) + fib(n - 2);
+	return f[n];
+}
+int main() {
+	int n;
+	cout << "Nhap n: "; cin >> n;
+	f[1] = 1, f[2] = 1;
+	cout << "So hang thu " << n << " cua day FIBONACCI: " << fib(n);
+	return 0;
+}
+//Cách làm này tối ưu hơn vì ta dùng biến ghi nhớ lại thông tin về lời giải của các bài toán con ngay sau lần đầu nó được giải.
+//Điều đó cho phép rút ngắn tgian tính của thuật toán vì mỗi khi cần thì có thể tra cứu lại biến nhớ mà không cần giải lại các bài toán con.

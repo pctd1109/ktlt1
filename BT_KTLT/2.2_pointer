@@ -1,0 +1,55 @@
+#include<iostream>
+using namespace std;
+struct	thisinh{
+	char id[10];
+	char hoten[32];
+	float diemcb;
+	float diemcn1;
+	float diemcn2;
+	float tong3mon;
+};
+void nhap(thisinh *&ts, int &n){
+	cout <<"Nhap so luong thi sinh: "; cin>>n;
+	ts=new thisinh[n];
+	for(int i=0;i<n;i++){
+		cout <<"Nhap thong tin thi sinh thu "<<i+1<<": \n";
+		cout <<"MSSV: ";	fflush(stdin);	gets((ts+i)->id);
+		cout <<"Ho ten: "; fflush(stdin);	gets((ts+i)->hoten);
+		cout <<"Diem mon co ban: ";	cin>>(ts+i)->diemcb;
+		cout <<"Diem mon chuyen nganh 1: ";	cin>>(ts+i)->diemcn1;
+		cout <<"Diem mon chuyen nganh 2: "; cin>>(ts+i)->diemcn2;
+		(ts+i)->tong3mon=(ts+i)->diemcb+(ts+i)->diemcn1+(ts+i)->diemcn2;
+	}
+}
+void xuat(thisinh *ts, int n){
+	for(int i=0;i<n;i++){
+		cout <<(ts+i)->id<<"||"<<(ts+i)->hoten<<"||"<<(ts+i)->diemcb<<"||"<<(ts+i)->diemcn1<<"||"<<(ts+i)->diemcn2<<"||"<<(ts+i)->tong3mon;
+		cout <<endl;	
+	}
+}
+void tim(thisinh *ts, int n){
+	cout <<"\Thi sinh co 1 mon < 5d: ";
+	for(int i=0;i<n;i++)
+		if((ts+i)->diemcb<5||(ts+i)->diemcn1<5||(ts+i)->diemcn2<5)
+			cout <<(ts+i)->hoten<<" ";
+}
+void timmax(thisinh *ts, int n){
+	float max=-1;
+	cout <<"\nThi sinh co diem tong cao nhat: ";
+	for(int i=0;i<n;i++){
+		float diemtong = (ts+i)->diemcb + (ts+i)->diemcn1 + (ts+i)->diemcn2;
+		if(diemtong>max)	max=diemtong;
+	}
+	for(int i=0;i<n;i++){
+		float diemtong = (ts+i)->diemcb + (ts+i)->diemcn1 + (ts+i)->diemcn2;
+		if(diemtong==max)	cout <<(ts+i)->hoten<< " ";
+	}
+}
+int main(){
+	thisinh* ts;
+	int n;
+	nhap(ts,n);
+	xuat(ts,n);
+	tim(ts,n);
+	return 0;
+}

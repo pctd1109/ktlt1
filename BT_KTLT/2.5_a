@@ -1,0 +1,102 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+struct	node{
+	int info;
+	node *next;
+};
+struct	list{
+	node *head, *tail;
+};
+list l;
+node *getnode(int x){
+	node *p=new node;
+	if(p==NULL)	exit(1);
+	p->info=x;
+	p->next=NULL;
+	return p;
+}
+void insert_tail(list &l, node *p){
+	if(l.head==NULL){
+		l.head=p;
+		l.tail=p;
+	}
+	else{
+		l.tail->next=p;
+		l.tail=p;
+	}
+}
+void list_insert_tail(list &l){
+	int x,n;
+	cout <<"Nhap so luong phan tu: "; cin>>n;
+	for(int i=0;i<n;i++){
+		cin>>x;
+		insert_tail(l,getnode(x));
+	}
+}
+void list_process(list l){
+	node *p=l.head;
+	while(p!=NULL){
+		cout <<p->info<<" ";
+		p=p->next;
+	}
+}
+int prime(int n){
+	if(n<2)	return 0;
+	for(int i=2;i<=sqrt(n);i++)
+		if(n%i==0)	return 0;
+	return 1;
+}
+//void xoa_dau(list &l){
+	node *p=l.head;
+	if(p!=NULL){
+		l.head=l.head->next;
+		delete(p);
+	}
+	else	l.tail=NULL;
+}
+//void xoa_duoi(list &l){
+	node *p=l.head;
+	while(p->next->next!=NULL)
+		p=p->next;
+	delete(p->next);
+	p->next=NULL;
+}
+void xoa_snt(list &l) {
+    node *p = l.head;
+    node *prev = NULL;
+
+    while (p != NULL) {
+        if (prime(p->info)) {
+            if (prev == NULL) {
+                // Nut dau tien chua SNT
+                l.head = p->next;
+                delete p;
+                p = l.head;
+            } else {
+                // Nut giua hoac nut cuoi chua SNT
+                prev->next = p->next;
+                if (p == l.tail) {
+                    l.tail = prev;
+                }
+                delete p;
+                p = prev->next;
+            }
+        } else {
+            prev = p;
+            p = p->next;
+        }
+    }
+}
+int main(){
+	list_insert_tail(l);
+	list_process(l);
+	//cout <<"\nMang sau khi xoa phan tu cuoi: ";
+	//xoa_dau(l);
+	//xoa_duoi(l);
+	//list_process(l);
+	cout <<"\nMang sau khi xoa SNT: ";
+	xoa_snt(l);
+	list_process(l);
+	return 0;
+}

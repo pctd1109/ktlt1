@@ -1,0 +1,47 @@
+#include<iostream>
+#define maxdong 100
+#define maxcot 100
+using namespace std;
+
+void xuat(int a[maxdong][maxcot], int dong, int cot){
+	for(int i=0;i<dong;i++){
+		for(int j=0;j<cot;j++)
+			cout <<a[i][j]<<" ";
+		cout << endl;
+	}
+}
+void spiral(int a[maxdong][maxcot], int dong, int cot){
+	int rows=0, rowe=dong-1;
+	int cols=0, cole=cot-1;
+	while(rows<=rowe&&cols<=cole){
+		for(int i=cols;i<=cole;i++)
+			cin>>a[rows][i];
+		rows++;
+		
+		for(int i=rows;i<=rowe;i++)
+			cin>>a[i][cole];
+		cole--;
+		
+		if(rows<=rowe){
+			for(int i=cole;i>=cols;i--)
+				 cin>> a[rowe][i];
+			rowe--;
+		}
+		
+		if(cols<=cole){
+			for(int i=rowe;i>=rows;i--)
+				cin >> a[i][cols];
+			cols++;
+		}
+	}
+}
+int main(){
+	int a[maxdong][maxcot];
+	int dong, cot;
+	cout <<"Nhap so dong: ";cin>>dong;
+	cout <<"Nhap so cot: ";cin>>cot;
+	spiral(a,dong,cot);
+	xuat(a,dong,cot);
+	//spiral(a,dong,cot);
+	return 0;
+}

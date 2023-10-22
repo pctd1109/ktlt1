@@ -1,0 +1,42 @@
+#include<iostream>
+#define maxn 1000
+using namespace std;
+void nhap(int a[], int &n){
+	cout <<"Nhap so luong phan tu: ";	cin>>n;
+	for(int i=0;i<n;i++)
+		cin>>a[i];
+}
+void xuat(int a[], int n){
+	for(int i=0;i<n;i++)
+		cout <<a[i]<<" ";
+}
+void exch(int &a, int &b){
+	int temp=a;
+	a=b;
+	b=temp;
+}
+void quicksort(int a[], int left, int right){
+	int i,j,x;
+	if(left>=right)	return;	//Truong hop mang khong co hoac chi co 1 phan tu thi tra ve trang thai hien tai
+	i=left;	j=right;
+	x=a[(left+right)/2];	//Chon phan tu giua lam pivot
+	do{
+		while(a[i]<x)	i++;
+		while(a[j]>x)	j--;
+		if(i<=j){
+			exch(a[i],a[j]);
+			i++;	j--;
+		}
+	}while(i<j);
+	if(left<j)	quicksort(a,left,j);
+	if(right>i)	quicksort(a,i,right);
+}
+int main(){
+	int a[maxn], n;
+	nhap(a,n);
+	xuat(a,n);
+	quicksort(a,0,n-1);
+	cout <<"\nMang sau khi sap xep theo thu tu tang dan: ";
+	xuat(a,n);
+	return 0;
+}

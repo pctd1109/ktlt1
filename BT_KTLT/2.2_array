@@ -1,0 +1,80 @@
+#include<iostream>
+#define maxn 1000
+using namespace std;
+struct	thisinh{
+	char id[10];
+	char hoten[30];
+	float diemcb;
+	float diemcn1;
+	float diemcn2;
+	float tong2;
+};
+thisinh ts;
+void nhap(thisinh ts[], int &n){
+	cout <<"Nhap so luong thi sinh: ";cin>>n;
+	for(int i=0;i<n;i++){
+		cout <<"Nhap thong tin thi sinh thu "<<i+1<<": \n";
+		cout <<"Nhap MSSV: ";	fflush(stdin);	gets(ts[i].id);
+		cout <<"Nhap ho ten: ";	fflush(stdin); 	gets(ts[i].hoten);
+		cout <<"Nhap diem mon co ban: ";	cin>>ts[i].diemcb;
+		cout <<"Nhap diem mon chuyen nganh 1: ";	cin>>ts[i].diemcn1;
+		cout <<"Nhap diem mon chuyen ngahh 2: ";	cin>>ts[i].diemcn2;
+		ts[i].tong2=ts[i].diemcn1+ts[i].diemcn2;
+	}
+}
+void xuat(thisinh ts[], int n){
+	for(int i=0;i<n;i++){
+		printf("\n %d", i+1);
+		printf("\t %s", ts[i].id);
+		printf("\t %s", ts[i].hoten);
+		printf("\t %.2f", ts[i].diemcb);
+		printf("\t %.2f", ts[i].diemcn1);
+		printf("\t %.2f", ts[i].diemcn2);
+		printf("\tDiem tong 2 mon chuyen nganh: ");
+		printf("\t %.2f", ts[i].tong2);
+	//	printf("\t %.2f", ts[i].diemtong);
+		
+	}
+}
+void tim(thisinh ts[], int n){
+	for(int i=0;i<n;i++)
+		if(ts[i].diemcb<5||ts[i].diemcn1<5||ts[i].diemcn2<5)
+			cout <<"\nThi sinh co diem 1 trong 3 mon < 5: "<<ts[i].hoten;
+}
+void tim2(thisinh ts[], int n){
+	float max=-1;
+	cout <<"\nThi sinh co diem tong cao nhat: ";
+	for(int i=0;i<n;i++){
+		float diemtong = ts[i].diemcb + ts[i].diemcn1 + ts[i].diemcn2;
+		if(diemtong>max)	max=diemtong;
+	}
+	for(int i=0;i<n;i++){
+		float diemtong = ts[i].diemcb + ts[i].diemcn1 + ts[i].diemcn2;
+		if(diemtong==max)	cout <<ts[i].hoten<< " ";
+	}
+	
+}
+void exch(float &a, float &b){
+	float temp=a;
+	a=b;
+	b=temp;
+}
+void sapXep(thisinh ts[], int n) {
+	cout <<"\nDanh sach diem sau khi sap xep: ";
+	for(int i=0;i<n-1;i++)
+   		for(int j=i+1;j<n;j++)
+   			if(ts[i].tong2>ts[j].tong2)	exch(ts[i].tong2, ts[j].tong2);
+}
+int main(){
+	thisinh ts[maxn];
+	int n;
+	nhap(ts,n);
+	xuat(ts,n);
+//	tim(ts,n);
+//	tim2(ts,n);
+//	swap(ts,n);
+	
+	sapXep(ts,n);
+	xuat(ts,n);
+	return 0;
+}

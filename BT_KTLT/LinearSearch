@@ -1,0 +1,39 @@
+#include<iostream>
+#include<cstdlib>
+#define maxn 1000
+using namespace std;
+void nhap(int a[], int &n){
+	cout <<"Nhap so luong phan tu: "; cin>>n;
+	for(int i=0;i<n;i++)
+		cin>>a[i];
+}
+void xuat(int a[], int n){
+	for(int i=0;i<n;i++)
+		cout <<a[i]<<" ";
+}
+int LinearSearch(int a[], int n, int x){
+	int i = 0;
+	while(i<n&&a[i]!=x)
+		i++;
+	if(i==n)	return -1;	//tìm hết nhưng không thấy
+	return 1;	//tìm thấy a[i] là phần tử có khóa x
+}
+int LinearSearch_v2(int a[], int n, int x){
+	int i=0;
+	a[n]=x;
+	while(a[i]!=x)
+		i++;
+	if(i==n)	return -1;
+	return 1;
+}
+//v1 vs v2: v2 có thêm phần tử cầm canh a[n]=x, khi while chạy đến phần tử cầm canh sẽ tự động out mà không cần
+//phải xét thêm điều kiện i<n như v1
+int main(){
+	int a[maxn], n;
+	nhap(a,n);
+	xuat(a,n);
+	int x;
+	cout <<"\nNhap gia tri x can tim: "; cin>>x;
+	cout <<"RESULT (1/-1): "<<LinearSearch_v2(a,n,x);
+	return 0;
+}

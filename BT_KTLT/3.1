@@ -1,0 +1,48 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+void nhap(char *s){
+	puts("Nhap chuoi: ");
+	fflush(stdin);
+	fgets(s,512,stdin);
+}
+//caua
+void demHoaThuong(char *s, int &hoa, int &thuong){
+	hoa=thuong=0;
+	int length=strlen(s);	//strlen(s)-1 la tru di ki tu '\n' nhung truong hop nay tinh ca ki tu '\n' nen chi can strlen(s)
+	for(int i=0;i<length;i++)
+		if(s[i]>='A'&&s[i]<='Z')	hoa++;
+		else if(s[i]>='a'&&s[i]<='z')	thuong++;
+	cout <<"\nSo luong chu Hoa: "<<hoa;
+	cout <<"\nSo luong chu thuong: "<<thuong;
+}
+//caub
+void inAscci (char* s)
+{
+    for(int i=0;i<strlen(s);i++)
+    {
+    	cout <<"\nMa ASCII cua ky tu thu "<<i+1<<": ";
+        cout<<(int)s[i];
+    }
+}
+//caud
+int tongsotu(char *s){
+	int dem=0;
+	char*temp=strchr(s,' ');
+	while(temp!=NULL){
+		dem++;
+		temp=temp+1;
+		temp=strchr(temp, ' ');
+	}
+	return dem+1;
+}
+int main(){
+	char *s=new char[512];
+	nhap(s);
+	puts(s);
+	int hoa, thuong;
+	demHoaThuong(s,hoa,thuong);
+	inAscci(s);
+	cout <<"\nSo luong tu cua chuoi: "<<tongsotu(s);
+	return 0;
+}

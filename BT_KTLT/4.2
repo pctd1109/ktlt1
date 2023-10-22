@@ -1,0 +1,81 @@
+#include<iostream>
+#include<cstdlib>
+#include<time.h>
+#include<cmath>
+#define maxn 1000
+using namespace std;
+void docfile(int a[],int n){
+	FILE*f;
+	f=fopen("NUM.INP","rt");
+	fscanf(f,"%d",&n);
+	for(int i=1;i<=n;i++){
+		fscanf(f,"%d",&a[i]);
+		cout<<a[i]<<" ";
+	}
+	fclose(f);
+}
+int caua(int a[],int n){
+	int max=INT_MIN;
+	for(int i=1;i<=n;i++)
+		if(a[i]>max)	max=a[i];
+	return max;
+}
+int caub(int a[],int n){
+	int len=1;
+	int maxlen=1;
+	for(int i=0;i<n;i++){
+		if(a[i]<a[i+1])	len++;
+		else{
+			if(len>maxlen)	maxlen=len;
+			len=1;
+		}
+		if(len>maxlen)	maxlen=len;
+	}
+	return maxlen;
+}
+int cauc(int a[],int n,int m){
+	int dem=0;
+	int s=0;
+	for(int i=0;i<n;i++)
+		for(int j=i+1;j<n;j++){
+			s=a[i]+a[j];
+			if(s==m){
+				cout<<"("<<a[i]<<","<<a[j]<<")";
+				dem++;
+			}
+			else if(s!=m)	{
+				cout<<"\nKhong co cap so nao co tong bang m!!!!!";	break;
+			}
+		}
+	return dem;
+}
+void ghifile(int a[],int n,int m){
+	FILE*f;
+	f=fopen("NUM.OUT","wt");
+	fprintf(f,"\nKet qua: \n");
+	//fprintf(f,"Cau a: %d\n",caua(a,n));
+	//fprintf(f,"Cau b: %d\n",caub(a,n));
+	//fprintf(f,"Cau c: %d\n",cauc(a,n,m));
+	fclose(f);
+}
+int main(){
+	FILE*f;
+	f=fopen("NUM.INP","wt");
+	int n,m,demsnt=0;
+	int a[maxn];
+	srand(time(NULL));
+	cout <<"Nhap so luong phan tu: ";cin>>n;
+	fprintf(f,"%d\n",n);
+	cout<<"Nhap gia tri m: ";cin>>m;
+	fprintf(f,"%d\n",m);
+	for(int i=1;i<=n;i++){ 
+		fprintf(f,"%6d",rand());
+		if(i%10==0)	fprintf(f,"\n");
+	}
+	fclose(f);
+	docfile(a,n);
+	cout<<"\nGia tri lon nhat: "<<caua(a,n);	
+	cout<<"\nChieu dai cua day con lien tiep tang dai nhat: "<<caub(a,n);
+	cout<<"\nSo luong cap so co tong bang m: "<<cauc(a,n,m);
+	return 0;
+}

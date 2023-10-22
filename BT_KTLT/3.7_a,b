@@ -1,0 +1,57 @@
+#include<iostream>
+using namespace std;
+struct	ngaysinh{
+	int ngay; 
+	int thang;
+	int nam;
+};
+struct nhanvien{
+	char id[10];
+	char hoten[32];
+	ngaysinh ns;
+	long long luongcb;
+	long long thuong;
+	long long thuclanh;
+};
+void nhap(nhanvien *&nv, int &n){
+	cout <<"Nhap so luong nhan vien: "; cin>>n;
+	nv=new nhanvien[n];
+	for(int i=0;i<n;i++){
+		cout <<"Nhap thong tin nhan vien thu "<<i+1<<": \n";
+		cout <<"Ma nhan vien: "; fflush(stdin);	gets((nv+i)->id);
+		cout <<"Ho ten: ";	fflush(stdin);	gets((nv+i)->hoten);
+		cout <<"Ngay sinh: ";	cin>>nv[i].ns.ngay>>nv[i].ns.thang>>nv[i].ns.nam;
+		cout <<"Luong co ban: ";	cin>>(nv+i)->luongcb;
+		cout <<"Thuong: ";	cin>>(nv+i)->thuong;
+		(nv+i)->thuclanh=(nv+i)->luongcb+(nv+i)->thuong;
+	}
+}
+void xuat(nhanvien *nv, int n){
+	for(int i=0;i<n;i++){
+		cout <<(nv+i)->id<<"||"<<(nv+i)->hoten<<"||"<<nv[i].ns.ngay<<"/"<<nv[i].ns.thang<<"/"<<nv[i].ns.nam<<"||"<<(nv+i)->luongcb<<"||"<<(nv+i)->thuong<<"||"<<(nv+i)->thuclanh;
+		cout<<endl;
+	}
+}
+void exch(nhanvien &a, nhanvien &b){
+	nhanvien temp=a;
+	a=b;
+	b=temp;
+}
+void luong_giam_dan(nhanvien *nv, int n){
+	for(int i=0;i<n-1;i++){
+		int max=i;
+		for(int j=i+1;j<n;j++)
+			if(nv[max].luongcb<nv[j].luongcb)	max=j;
+		if(max!=i)	exch(nv[max],nv[i]);
+	}
+}
+int main(){
+	nhanvien *nv;
+	int n;
+	nhap(nv,n);
+	xuat(nv,n);
+	cout <<"\nDanh sach nhan vien theo bac luong giam dan: \n";
+	luong_giam_dan(nv,n);
+	xuat(nv,n);
+;	return 0;
+}

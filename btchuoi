@@ -1,0 +1,86 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+void xuatfile(){
+	FILE*f=fopen("strd.txt","rt");
+	char*s=new char[512];
+	while(!feof(f)){
+		fgets(s,512,f);
+		puts(s);
+	}
+	fclose(f);
+}
+void dem_chuoi(){
+	FILE*f=fopen("strd.txt","rt");
+	char*s=new char[512];
+	int d=0;
+	while(!feof(f)){
+		fgets(s,512,f);
+		if(s[strlen(s)-1]!=127)	d++;
+	}
+	cout <<"\nSo luong chuoi trong file: "<<d;
+	fclose(f);
+}
+void chieu_dai(){
+	FILE*f=fopen("strd.txt","rt");
+	char*s=new char[512];
+	cout <<"\nChieu dai cua cac chuoi: ";
+	while(!feof(f)){
+		fgets(s,512,f);
+		cout <<strlen(s)-1<< " ";
+	}
+	fclose(f);
+}
+void chuoi_dai_nhat(){
+	FILE*f=fopen("strd.txt","rt");
+	char*s=new char[512];
+	int max=0;
+	while(!feof(f)){
+		fgets(s,512,f);
+		int dem=strlen(s)-1;
+		if(dem>max)	max=dem;
+	}
+	cout <<"\nChuoi dai nhat: "<<max;
+	fclose(f);
+}
+void tu_moi_chuoi(){
+	FILE*f=fopen("strd.txt","rt");
+	char*s=new char[512];
+	int d,i=1;
+	while(!feof(f)){
+		d=0;
+		fgets(s,512,f);
+		char*temp=strtok(s," ");
+		while(temp!=NULL){
+			d++;
+			temp=strtok(NULL," ");
+		}
+		cout <<"\nSo tu cua chuoi thu "<<i<<": "<<d;
+		i++;
+	}
+	fclose(f);
+}
+void tu_ca_file(){
+	FILE*f=fopen("Strd.txt.","rt");
+	char*s=new char[512];
+	int d=0;
+	while(!feof(f)){
+		fgets(s,512,f);
+		char*temp=strtok(s," ");
+		while(temp!=NULL){
+			d++;
+			temp=strtok(NULL," ");
+		}
+	}
+	cout <<"\nSo tu ca file: "<<d;
+	fclose(f);
+}
+int main(){
+	xuatfile();
+	dem_chuoi();
+	chieu_dai();
+	chuoi_dai_nhat();
+	tu_moi_chuoi();
+	tu_ca_file();
+	return 0;
+}

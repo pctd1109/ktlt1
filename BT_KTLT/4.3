@@ -1,0 +1,94 @@
+#include<iostream>
+#include<cstdlib>
+#include<ctime>
+#include<cmath>
+#define maxdong 500
+#define maxcot 500
+using namespace std;
+void docfile(int a[maxdong][maxcot],int dong, int cot){
+	FILE*f;
+	f=fopen("table.inp","rt");
+	fscanf(f,"%d",&dong);
+	fscanf(f,"%d",&cot);
+	for(int i=0;i<dong;i++)
+		for(int j=0;j<cot;j++)
+			fscanf(f,"%d",&a[i][j]);
+	fclose(f);
+}
+int prime(int n){
+	if(n<2)	return 0;
+	for(int i=2;i<=sqrt(n);i++)
+		if(n%i==0)	return 0;
+	return 1;
+}
+int caua(int a[maxdong][maxcot], int dong, int cot){
+	int demsnt=0;
+	for(int i=0;i<dong;i++)
+		for(int j=0;j<cot;j++)
+			if(prime(a[i][j]))	demsnt++;
+	return demsnt;
+}
+int tongdong(int a[maxdong][maxcot],int dong, int cot){
+	int maxrow=INT_MIN;
+	for(int i=0;i<dong;i++){
+		int sumrow=0;
+		for(int j=0;j<cot;j++){
+			sumrow=sumrow+a[i][j];
+		}
+		cout << "Tong moi dong: "<<sumrow;
+		cout << endl;
+		if(sumrow>maxrow)	maxrow=sumrow;
+	}
+	cout <<"Gia tri lon nhat trong so cac tong cac phan tu tren moi dong: "<<maxrow;
+	cout <<endl;
+	return maxrow;
+}
+int tongcot(int a[maxdong][maxcot], int dong, int cot){
+	int maxcol=INT_MIN;
+	for(int j=0;j<cot;j++){
+		int sumcol=0;
+		for(int i=0;i<dong;i++)
+			sumcol=sumcol+a[i][j];
+		cout <<"Tong moi cot: "<<sumcol;
+		cout << endl;
+		if(sumcol>maxcol)	maxcol=sumcol;
+	}
+	cout <<"Gia tri lon nhat trong so cac tong cac phan tu tren moi cot: "<<maxcol;
+	cout <<endl;
+	return maxcol;
+}
+void ghifile(int a[maxdong][maxcot],int dong, int cot){
+	FILE*f;
+	f=fopen("table.out","wt");
+	fprintf(f,"\nCau a: %d",caua(a,dong,cot));
+	fprintf(f,"\nCau b: %d",tongdong(a,dong,cot));
+	fprintf(f,"\nCau c: %d",tongcot(a,dong,cot));
+}
+int main(){
+	FILE*f;
+	f=fopen("table.inp","wt");
+	int dong,cot;
+	int a[maxdong][maxcot];
+	srand(time(NULL));
+	cout <<"Nhap so dong: ";cin>>dong;
+	cout <<"Nhap cot: ";cin>>cot;
+	fprintf(f,"So dong: \n");
+	fprintf(f,"%d\n",dong);
+	fprintf(f,"So cot: \n");
+	fprintf(f,"%d\n",cot);
+	for(int i=0;i<dong;i++){
+		for(int j=0;j<cot;j++){
+			a[i][j]=rand()%100;
+			fprintf(f,"%6d",a[i][j]);
+		}
+		fprintf(f,"\n");
+	}
+	fclose(f);
+	docfile(a,dong,cot);
+//	cout << "\nSo luong SNT: "<<caua(a,dong,cot);
+//	cout<<"\nCau b: "<<caub(a,dong,cot);
+//	tongdong(a,dong,cot);
+//	tongcot(a,dong,cot);
+	ghifile(a,dong,cot);
+	return 0;
+}
